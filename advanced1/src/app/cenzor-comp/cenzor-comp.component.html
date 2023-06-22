@@ -1,0 +1,18 @@
+<div class="container">
+    <header>
+        <h1>List of prohibited words:</h1>
+    </header>
+    <div class="wrapper">
+        <div class="badWord">
+            <h4>Bad Words:</h4>
+            <span id="wordList">{{list}}</span>
+        </div>
+        <div class="enterArea">
+            <input type="text" [class]="emptyWordField" [(ngModel)]="enterWord" name="enterWord" id="enterWord" [placeholder]="placeholderWord">
+            <input type="button" (click)="addWord()" value="Add" id="addWord">
+            <input type="button" (click)="reset()" value="Reset" id="clearList">
+        </div>
+        <textarea name="textHere" [class]="emptyTextField" [(ngModel)]="cenzorField" id="enterText" [placeholder]="placeholderText"></textarea>
+        <input type="button" (click)="cenzor()" value="cenzor" id="startCenzor">
+    </div>
+</div>
