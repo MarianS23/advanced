@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="setUser">
+        <form id="setUserInfoForm">
+            <label for="userLogin">Login</label>
+            <input class="userInfo" [(ngModel)]="userLogin" name="userLogin" type="text" id="userLogin"
+                placeholder="Enter login" pattern="^[A-Za-z]{3,20}$">
+            <label for="userPassword">Password</label>
+            <input class="userInfo" [(ngModel)]="userPassword" name="userPassword" type="password" id="userPassword"
+                placeholder="Enter password" pattern="[\w\d]{2,15}">
+            <label for="userEmail">Email</label>
+            <input class="userInfo" [(ngModel)]="userEmail" name="userEmail" type="email" id="userEmail"
+                placeholder="Enter email" pattern="\w+@\w+\.\w{2,5}$">
+            <input type="button" [class]="isActive?'btn blue':'btn green'" (click)="isActive?update():addUser()" [value]="isActive?'Update':'Add user'"
+                id="addUser" [disabled]="!userLogin||!userPassword||!userEmail">
+        </form>
+    </div>
+    <div class="showUser">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Login</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <ng-container *ngIf="isAdded; else elseTemplate">
+
+                </ng-container>
+
+
+                <ng-template #elseTemplate>
+                    <tr *ngFor="let user of users; index as i">
+                        <th>{{i+1}}</th>
+                        <th>{{user.login}}</th>
+                        <th>{{user.password}}</th>
+                        <th>{{user.email}}</th>
+                        <th><input type="button" on-click="editUser(i)" class="editBtn" value="Edit"></th>
+                        <th><input type="button" on-click="delete(i)" class="deleteBtn" value="Delete"
+                                [disabled]="isActive"></th>
+                    </tr>
+                </ng-template>
+
+            </tbody>
+        </table>
+    </div>
+</div>
