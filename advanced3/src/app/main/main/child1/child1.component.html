@@ -1,0 +1,35 @@
+<!-- <ng-content></ng-content> добавляється якщо потрібно щоб в селекторі даного компонента в батківській розмітці можна було щось писати-->
+
+<div class="showUser">
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Task</th>
+                <th>Check</th>
+                <th>DONE/IN PROGRES</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <ng-container *ngIf="isAdded; else elseTemplate">
+                
+            </ng-container>
+            <ng-template #elseTemplate >
+                <tr *ngFor="let task of taskList,index as i">
+                    <th>{{i+1}}</th>
+                    <th>{{task.task_name}}</th>
+                    <th><input type="checkbox" [checked]="task.status" (change)="task.status=!task.status"></th>
+                    <th [style.color]="task.status?'green':'red'" [textContent]="task.status?'DONE':'IN PROGRESS'"></th>
+                    <th><input type="button" on-click="editTask(i)" class="editBtn" value="Edit" ></th>
+                    <th><input type="button" on-click="deleteTask(i)" class="deleteBtn" value="Delete" [disabled]="!task.status"></th>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <div class="update" *ngIf="isUpdate">
+        <input type="text" [(ngModel)]="updateField" name="updateField" class="updateField">
+        <input type="button" on-click="updateTask()" value="update" class="updateBtn">
+    </div>
+</div>

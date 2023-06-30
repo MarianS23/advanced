@@ -1,0 +1,52 @@
+
+
+.head{
+    text-align: start;
+    width: 100%;
+    height: fit-content;
+    font-size: 18px;
+    margin-bottom: 20px; 
+}
+
+.addTask{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.addTask_field{
+    width: 79%;
+    height: 30px;
+    padding-left: 5px;
+    border: 1px solid rgb(224, 224, 224);
+    outline: none;
+    border-radius: 5px;
+}
+
+.addTask_btn{
+    width: 20%;
+    height: 30px;
+    background-color: green;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    
+}
+
+.addTask_btn:hover:enabled{
+    outline: 1px solid rgb(83, 206, 83);
+    background-color: rgb(13, 86, 13);
+}
+
+.addTask_btn:disabled{
+    background-color: rgb(124, 163, 124);
+}
+app-child1{
+    width: 100%;
+}
+
+
+

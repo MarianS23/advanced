@@ -1,0 +1,15 @@
+<div class="wrapper">
+    <header class="head">
+        <h1>Plan your day!</h1>
+        <h2>User:<span class="userName">{{userName}}.</span><span class="numOfTasks">Count of task:{{sumOfTasks}}</span></h2>
+    </header>
+    <hr class="grayLine">
+    <div class="addTask">
+        <input type="text" [(ngModel)]="setTask" name="setTask" class="addTask_field">
+        <input type="button" on-click="addTask()" [disabled]="!setTask" class="addTask_btn" value="Add">
+    </div>
+    <hr class="grayLine">
+    <app-child1 [taskList]="tasks" [isAdded]="isAdd" (deleteElem)="updateCount()"><!-- щоб можна було тут писати --></app-child1>
+    
+</div>
+<hr>
