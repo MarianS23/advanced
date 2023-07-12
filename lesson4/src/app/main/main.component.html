@@ -1,0 +1,41 @@
+<div class="wrapper">
+    <header class="head">
+        <h1 class="title">My phone book!</h1>
+        <hr class="grayLine">
+        <div class="addField">
+            <input type="text" class="searchField" [(ngModel)]="searchField" name="searchField" placeholder="search text goes here">
+            <input type="button" value="add phone" on-click="clickAddBtn()" class="addPhoneBtn">
+        </div>
+        
+    </header>
+    
+    <hr class="grayLine">
+
+    <app-contacts [isSaveBtnClick]="isSaveBtnClick" [phoneBook]="phoneBook"
+    [searchField]="searchField" 
+     (sendIndexToParent)="getIndexFromChild($event)"
+     (sendBtnStatus)="clickEditBtn($event)">
+    </app-contacts>
+    
+    <ng-container *ngIf="!isAddBtnClick; else elseTemplate"> 
+    </ng-container>
+    <ng-template #elseTemplate>
+        <div class="modal-container">
+            <div class="modal">
+                <h1>Add phone</h1>
+                <hr class="grayLine modalLine">
+                <input type="text"  class="addContactField" [(ngModel)]="firstName" name="firstName" placeholder="first name goes here">
+                <input type="text"  class="addContactField" [(ngModel)]="lastName" name="lastName" placeholder="second name goes here">
+                <input type="text"  class="addContactField" [(ngModel)]="number" name="number" placeholder="phone number goes here">
+                <hr class="grayLine modalLine">
+                <div class="add-saveBtn">
+                    <!-- <input type="button" value="fill array" on-click="addBook()" class="addNumbers"> -->
+                <input type="button" value="save" [disabled]="!firstName||!lastName||!number" on-click="isEditBtnClick?updateContact():clickSaveBtn()" class="saveContactBtn">
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    
+    
+</div>
+

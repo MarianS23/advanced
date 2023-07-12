@@ -1,0 +1,62 @@
+.showUser{
+    width: 100%;
+    height: fit-content;
+    margin: 0 auto;
+}
+
+table{
+    width: 100%;
+    height: fit-content;
+    border-collapse: collapse;
+}
+
+table tbody tr{
+    border-top: 1px solid rgba(205, 205, 205, 0.7);
+    height: 45px;
+    width: 90%;
+}
+
+thead tr th{
+    height: 40px;
+    width: 20%;
+    text-align: start;
+    padding-left: 10px;
+}
+tbody tr td{
+    font-style:normal;
+    font-weight: 100;
+    height: 40px;
+    width: 20%;
+    text-align: start;
+    padding-left: 10px;
+}
+
+.editBtn{
+    width: 25%;
+    background-color: green;
+    color: white;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+}
+.editBtn:hover{
+    background-color: rgb(26, 197, 26);
+}
+.editBtn:disabled{
+    background-color: rgb(93, 130, 93);
+}
+
+.deleteBtn{
+    width: 25%;
+    background-color: rgb(154, 8, 8);
+    color: white;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+}
+.deleteBtn:hover{
+    background-color: rgb(235, 28, 28);
+}
+.deleteBtn:disabled{
+    background-color: rgb(180, 114, 114);
+}

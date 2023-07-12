@@ -1,0 +1,30 @@
+
+<div class="showUser">
+    <table>
+        <thead>
+            <tr>
+                <th (click)="sortfirstName(phoneBook, sortType)">First name</th>
+                <th (click)="sortLastName(phoneBook, sortType)">Last name</th>
+                <th (click)="sortNumber(phoneBook, sortType)">Number</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            
+            <ng-container *ngIf="isSaveBtnClick; else elseTemplate">
+                
+            </ng-container>
+            <ng-template #elseTemplate>
+                
+                <tr *ngFor="let contact of phoneBook | search:searchField,index as i">
+                    <td>{{contact.firstName | titlecase}}</td>
+                    <td>{{contact.lastName | titlecase}}</td>
+                    <td>{{contact.number}}</td>
+                    <td><input type="button" class="editBtn" on-click="clickEditBtn(i)" value="Edit"></td>
+                    <td><input type="button" class="deleteBtn" on-click="clickDeleteBtn(i)" value="Delete"></td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</div>
