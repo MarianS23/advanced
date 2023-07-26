@@ -1,0 +1,120 @@
+<div class="wrapper">
+    <div class="header">
+        <h1 class="header-title">
+            Angular Blog
+        </h1>
+        <div class="buttonGroup">
+            <input type="button" on-click="loginSuccess?clickAddPostBtn():clickSignInBtn()" class="btn signInBtn"
+                [value]="loginSuccess?'Add post':'sign in'">
+            <div class="btn userBtn" *ngIf="loginSuccess">{{currentUser}}</div>
+            <input type="button" on-click="loginSuccess?clickSignOut():clickSignUpBtn()" class="btn signUpBtn"
+                [value]="loginSuccess?'Sign Out':'sign up'" [ngClass]="{'signOutBtn': loginSuccess}">
+        </div>
+    </div>
+    <div class="content">
+        <ul>
+            <li class="postedItem" *ngFor="let postedItem of posts,index as i">
+                <div class="item">
+                    <h1 class="postNumber">{{postedItem.title}}</h1>
+                    <h4 class="postedBy">Posted by:{{postedItem.postedBy}}</h4>
+                    <p class="text">{{postedItem.topic}}</p>
+                </div>
+
+                <div class="date">{{postedItem.date}}</div>
+                <div class="postedItem_btnBlok" *ngIf="currentUser === adminLogin||postedItem.postedBy === currentUser">
+                    <input type="button" class="postedItem_EditBtn"  on-click="clickEditCurrentPost(i)" value="Edit">
+                    <input type="button" class="postedItem_DeleteBtn" on-click="clickDeleteCurrentPost(i)" value="Delete">
+                </div>
+
+            </li>
+        </ul>
+
+    </div>
+    <!--modals---------------------------------------------------------------------------------------------------------------------------------->
+    <!--модальне вікно входу-->
+    <div class="modal-container" *ngIf="signInPressed">
+        <div class="modal mo-signIn">
+            <div class="modal_header">
+                <h1 class="title">Sign in</h1>
+                <svg on-click="closeSignInModal()" xmlns="http://www.w3.org/2000/svg" height="1em"
+                    viewBox="0 0 384 512">
+                    <path
+                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                </svg>
+            </div>
+            <hr class="line">
+            <label for="signInEmailInput">Email:</label>
+            <input type="text" [(ngModel)]="userEmail" name="userEmail" class="textInput" id="signInEmailInput">
+            <label for="signInPasswordInput">Password:</label>
+            <input type="text" [(ngModel)]="userPassword" name="userPassword" class="textInput"
+                id="signInPasswordInput">
+            <hr class="line">
+            <div class="signInBtnGroup">
+                <p class="incorrectMessege" *ngIf="incorrectMessege" style="color:red">invalid email or password</p>
+                <input type="button" on-click="closeSignInModal()" class="modal-btn closeBtn" value="Close">
+                <input type="button" on-click="signInSubmit()" class="modal-btn submitBtn" value="Submit"
+                    [disabled]="!userEmail||!userPassword">
+
+            </div>
+
+        </div>
+    </div>
+
+    <!--модальне вікно реєстрації-->
+    <div class="modal-container" *ngIf="signUpPressed">
+        <div class="modal mo-signUp">
+            <div class="modal_header">
+                <h1 class="title">Sign up</h1>
+                <svg on-click="closeSignUpModal()" xmlns="http://www.w3.org/2000/svg" height="1em"
+                    viewBox="0 0 384 512">
+                    <path
+                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                </svg>
+            </div>
+            <hr class="line">
+            <label for="signUpNameInput">User name:</label>
+            <input type="text" [(ngModel)]="regUserName" name="regUserName" class="textInput" id="signUpEmailInput">
+            <label for="signUpEmailInput">Email:</label>
+            <input type="text" [(ngModel)]="regUserEmail" name="regUserEmail" class="textInput" id="signUpEmailInput">
+            <label for="signInPasswordInput">Password:</label>
+            <input type="text" [(ngModel)]="regUserPassword" name="regUserPassword" class="textInput"
+                id="signUpPasswordInput">
+            <hr class="line">
+            <div class="signInBtnGroup">
+                <p class="incorrectMessege" *ngIf="incorrectMessege">invalid information</p>
+                <input type="button" on-click="closeSignUpModal()" class="modal-btn closeBtn" value="Close">
+                <input type="button" on-click="signUpSubmit()" class="modal-btn submitBtn" value="Submit"
+                    [disabled]="!regUserName||!regUserEmail||!regUserPassword">
+            </div>
+        </div>
+    </div>
+
+    <!--модальне вікно додавання посту-->
+    <div class="modal-container" *ngIf="addPostPressed">
+        <div class="modal mo-addPost">
+            <div class="modal_header">
+                <h1 class="title">{{editPostPressed?'Edit post':'Add post'}}</h1>
+                <svg on-click="closeAddPostModal()" xmlns="http://www.w3.org/2000/svg" height="1em"
+                    viewBox="0 0 384 512">
+                    <path
+                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                </svg>
+            </div>
+            <hr class="line">
+            <label for="postTitleInput">Title:</label>
+            <input type="text" [(ngModel)]="postTitle" name="postTitle" class="textInput" id="postTitleInput">
+            <label for="postTopicInput">Text:</label>
+            <textarea name="postTopic" [(ngModel)]="postTopic" id="postTopicInput" class="postTopicInput"></textarea>
+            <hr class="line">
+            <div class="signInBtnGroup">
+                <!-- <p class="incorrectMessege" *ngIf="incorrectMessege">{{date}}</p> -->
+                <input type="button" on-click="closeAddPostModal()" class="modal-btn closeBtn" value="Close">
+                <input type="button" on-click="editPostPressed?editSumbit():postSubmit()" class="modal-btn submitBtn" value="Submit"
+                    [disabled]="!postTitle||!postTopic">
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
