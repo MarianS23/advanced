@@ -1,0 +1,57 @@
+<div class="content">
+    <div class="left">
+        <input type="button" class="blogsBtn" value="Blogs" [routerLink]="[ '/blog' ]" routerLinkActive="active">
+    </div>
+    <div class="right">
+        <div class="formBlock">
+            <input type="text" [(ngModel)]="adminTitle" name="adminTitle" class="formBlockInputs" placeholder="title here...">
+            <textarea name="adminText" [(ngModel)]="adminText" cols="30" rows="10" placeholder="text here..." class="formBlockArea"></textarea>
+            <input type="text" [(ngModel)]="adminAuthor" name="adminAuthor" class="formBlockInputs" placeholder="author here...">
+            <input type="button" [value]="isEditClick?'Save':'Add'" class="formBlockBtn commonBtnStyle" on-click="isEditClick?savePost():addPost()" [disabled]="!adminTitle||!adminText||!adminAuthor">
+        </div>
+        <hr class="grayLine">
+        <div class="tableBlock">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Text</th>
+                        <th>Author</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let post of posts; index as i">
+                        <th>{{i+1}}</th>
+                        <th>{{post.title}}</th>
+                        <th>{{post.text}}</th>
+                        <th>{{post.author}}</th>
+                        <th><input type="button"  class="commonBtnStyle" on-click="editPost(post)" value="Edit"></th>
+                        <th><input type="button"  class="commonBtnStyle" on-click="deletePost(post)" value="Delete"></th>
+                    </tr>
+                </tbody>
+                <!-- <tbody id="tableBody">
+                    <ng-container *ngIf="isAdded; else elseTemplate">
+    
+                    </ng-container>
+    
+    
+                    <ng-template #elseTemplate>
+                        <tr *ngFor="let user of users; index as i">
+                            <th>{{i+1}}</th>
+                            <th>{{user.login}}</th>
+                            <th>{{user.password}}</th>
+                            <th>{{user.email}}</th>
+                            <th><input type="button" on-click="editUser(i)" class="editBtn" value="Edit"></th>
+                            <th><input type="button" on-click="delete(i)" class="deleteBtn" value="Delete"
+                                    [disabled]="isActive"></th>
+                        </tr>
+                    </ng-template>
+    
+                </tbody> -->
+            </table>
+        </div>
+    </div>
+</div>
