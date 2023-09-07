@@ -1,0 +1,43 @@
+<div class="wrapper">
+    <div class="formBlock">
+        <input type="button" value="Додати категорію" class="addBtn" (click)="showAddMenu()">
+    </div>
+    <ng-container *ngIf="clickAddBtn; else elseTemplate">
+        <div class="add-category-form">
+            <input type="text" [(ngModel)]="categoryName" name="categoryName" class="text-input category" placeholder="*Назва">
+            <input type="text" [(ngModel)]="categoryWay" name="categoryWay" class="text-input category" placeholder="*Шлях">
+            <input type="file" [(ngModel)]="categoryFile" name="categoryFile" class="file-input category">
+        </div>
+        <input type="button" [disabled]="!categoryName && !categoryWay && !categoryFile" [value]="isUpdatePressed?'Зберегти':'Додати'" (click)="isUpdatePressed?updateCategory():addCategory()"  class="saveBtn">
+    </ng-container>
+    <ng-template #elseTemplate>
+        
+    </ng-template>
+    
+    <div class="tableBlock">
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Назва</th>
+                    <th>Шлях</th>
+                    <th>Картинка</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr *ngFor="let category of categories; index as i">
+                    <th>{{i+1}}</th>
+                    <th>{{category.name}}</th>
+                    <th>{{category.way}}</th>
+                    <th>{{category.file}}</th>
+                    <td class="action-block">
+                        <input type="button" value="Редагувати" (click)="clickUpdateCurrentCategory(category)" class="action-btn">
+                        <input type="button" value="Видалити" (click)="clickDeleteCurrentCategory(category)" class="action-btn">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

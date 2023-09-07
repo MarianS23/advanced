@@ -1,0 +1,45 @@
+<div class="wrapper">
+    <div class="formBlock">
+        <input type="button" value="Додати акцію" class="addBtn" (click)="showAddMenu()">
+    </div>
+    <ng-container *ngIf="clickAddBtn; else elseTemplate">
+        <div class="add-category-form">
+            <input type="text" [(ngModel)]="discountName" name="discountName" class="text-input discount" placeholder="*Назва">
+            <input type="text" [(ngModel)]="discountTitle" name="discountWay" class="text-input discount" placeholder="*Заголовок">
+            <textarea class="textarea discount" [(ngModel)]="discountDescription" name="discountDescription" placeholder="*Опис"></textarea>
+            <input type="file" [(ngModel)]="discountFile" name="discountFile" class="file-input discount">
+        </div>
+        <input type="button" [disabled]="!discountName && !discountTitle && !discountDescription && !discountFile" [value]="isUpdatePressed?'Зберегти':'Додати'" class="saveBtn" (click)="isUpdatePressed?updateDiscount():addDiscount()" >
+    </ng-container>
+    <ng-template #elseTemplate>
+        
+    </ng-template>
+    
+    <div class="tableBlock">
+        <table>
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Назва</th>
+                    <th>Заголовок</th>
+                    <th>Опис</th>
+                    <th>Картинка</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let discount of discounts; index as i">
+                    <th>{{discount.date}}</th>
+                    <th>{{discount.name}}</th>
+                    <th>{{discount.title}}</th>
+                    <th>{{discount.description}}</th>
+                    <th>{{discount.image}}</th>
+                    <td class="action-block">
+                        <input type="button" value="Редагувати" (click)="clickUpdateCurrentDiscount(discount)" class="action-btn">
+                        <input type="button" value="Видалити" (click)="clickDeleteCurrentDiscount(discount)" class="action-btn">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
