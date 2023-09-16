@@ -1,0 +1,15 @@
+<div class="main">
+    <div class="spacer-md"></div>
+    <div class="center-info">
+        <h1 class="h2 title text-center">Акції</h1>
+    </div>
+    <div class="spacer-md"></div>
+    <div class="wrapper">
+        <div class="discount-card" *ngFor="let discount of discounts">
+            <img [src]="discount.imagePath" alt="">
+            <h1 class="title">{{discount.name}}</h1>
+            <div class="blue-line"></div>
+            <input type="button" class="more-info-btn" value="Дізнатись більше">
+        </div>
+    </div>
+</div>

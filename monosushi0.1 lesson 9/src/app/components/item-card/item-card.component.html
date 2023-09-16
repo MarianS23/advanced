@@ -1,0 +1,22 @@
+<div class="tabs-content">
+    <div class="item-card" *ngFor="let product of products">
+        <div class="img-box">
+            <img [src]="product.imagePath">
+        </div>
+        <h3>{{product.name}}</h3>
+        <div class="item-info">
+            <span class="item-ingred">{{product.ingredients}}</span>
+            <span class="item-weight">{{product.weight}}г</span>
+        </div>
+        <div class="item-order">
+            <span class="item-price">{{product.price}}грн</span>
+            <div class="item-number">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+            </div>
+            <input class="item-order-btn" type="button" value="Замовити">
+
+        </div>
+    </div>
+</div>
