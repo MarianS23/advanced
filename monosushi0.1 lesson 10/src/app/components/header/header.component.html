@@ -1,0 +1,105 @@
+<header class="header">
+    <div class="header-wrapper popup-close" >
+        <div class="header-logo" [routerLink]="[ '/' ]" routerLinkActive="active">
+            <img src="https://monosushi.com.ua/wp-content/uploads/2021/06/logo.svg" alt="">
+        </div>
+        <div class="navbar">
+            <ul class="nav">
+                <li [routerLink]="[ '/discount' ]" routerLinkActive="active">
+                    <img src="https://monosushi.com.ua/wp-content/uploads/2020/10/nav-img-gift.svg" alt="">
+                    <span>Акції</span>
+                </li>
+                <li [routerLink]="[ '/product/roll' ]" routerLinkActive="active">
+                    <img src="https://monosushi.com.ua/wp-content/uploads/2020/10/nav-img-rolls.svg" alt="">
+                    <span>Роли</span>
+                </li>
+                <li [routerLink]="[ '/product/sets' ]" routerLinkActive="active">
+                    <img src="https://monosushi.com.ua/wp-content/uploads/2020/10/nav-img-sets.svg" alt="">
+                    <span>Сети</span>
+                </li>
+                <li [routerLink]="[ '/product/drinks' ]" routerLinkActive="active">
+                    <img src="https://monosushi.com.ua/wp-content/uploads/2020/10/nav-img-drinks.svg" alt="">
+                    <span>Напої</span>
+                </li>
+                <li [routerLink]="[ '/product/souce' ]" routerLinkActive="active">
+                    <img src="https://monosushi.com.ua/wp-content/uploads/2021/09/icon.svg" alt="">
+                    <span>Соуси</span>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="burger-menu">
+            <div class="dropbtn"><svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path
+                        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+                </svg></div>
+
+            <div class="burger-menu-content">
+                <a [routerLink]="[ '/delivery' ]" routerLinkActive="active">Доставка та оплата</a>
+                <a [routerLink]="[ '/about' ]" routerLinkActive="active">Про нас</a>
+                <a [routerLink]="[ '/discount' ]" routerLinkActive="active">Акції на суші</a>
+            </div>
+        </div>
+
+
+        <div class="header-callback">
+            <button>
+                <img src="https://monosushi.com.ua/wp-content/uploads/2020/10/phone.svg" alt="">
+            </button>
+        </div>
+        <div class="header-info">
+            <a class="header-phone" href="tel:+380978780837">+380978780837</a>
+            <div class="header-worktime">
+                Працюємо з
+                <b>11:00</b>
+                до
+                <b>22:30</b>
+            </div>
+        </div>
+        <div class="header-sign-in" [routerLink]="[ '/admin' ]" routerLinkActive="active">
+            <img src="https://monosushi.com.ua/wp-content/themes/monosushi/img/user.svg" alt="">
+        </div>
+        <div class="header-basket" (click)="toggleBusket()">
+            <i>
+                <img src="https://monosushi.com.ua/wp-content/themes/monosushi/img/basket.svg" alt="">
+                <span>{{totalCount}}</span>
+            </i>
+            <div class="empty-basket-price">
+                <b>{{totalPrice}}</b>
+                <span>грн</span>
+            </div>
+        </div>
+
+    </div>
+</header>
+<div class="modal-container" *ngIf="clickBasket">
+    <div class="modal">
+        <div class="item-card-busket">
+            <figure>
+                <img
+                src="https://firebasestorage.googleapis.com/v0/b/monosushi-ff35d.appspot.com/o/images%2F1.-filadelfiya-z-lososem.jpg?alt=media&token=e83bc8aa-4c3a-4d37-9363-c45af1b18578">
+            </figure>
+            <h3>Каліфорнія</h3>
+            <div class="item-order">
+                <div class="item-number">
+                    <button>-</button>
+                    <span>1</span>
+                    <button>+</button>
+                </div>
+                <span class="item-price">260 грн</span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                    viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path
+                        d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                </svg>
+            </div>
+            
+        </div>
+        <div class="order-info">
+            <span class="order-price">Сума:<h4>123</h4>грн</span>
+            <input class="order-btn" type="button" value="Оформити замовлення">
+        </div>
+    </div>
+</div>
